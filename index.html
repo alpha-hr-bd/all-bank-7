@@ -1,0 +1,199 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#102c59">
+  <title>All Bank 7 | Loan Platform</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="demo-banner">THIS PLATFORM MADE BY ALPHA.HR FOR SCAM ALLERT</div>
+
+<header class="navbar">
+  <a class="brand" href="#" onclick="showPage('home')">
+    <span class="brand-icon">7</span> ALL BANK <b>7</b>
+  </a>
+  <nav>
+    <a href="#" onclick="showPage('home')">Home</a>
+    <a href="#" onclick="showPage('banks')">Banks</a>
+    <a href="#" onclick="showPage('dashboard')">Dashboard</a>
+  </nav>
+  <div class="nav-actions">
+    <button class="btn light" id="loginBtn" onclick="showPage('login')">Login</button>
+    <button class="btn primary" id="registerBtn" onclick="showPage('register')">Register</button>
+    <button class="btn light hidden" id="logoutBtn" onclick="logout()">Logout</button>
+  </div>
+</header>
+
+<main>
+<section id="home" class="page active">
+  <div class="hero">
+    <div class="hero-content">
+      <span class="tag">DIGITAL FINANCE • EXPERIENCE</span>
+      <h1>Explore Your<br><span>Loan Options.</span></h1>
+      <p>Explore a simulated loan application experience, compare demo bank cards and track your virtual applications.</p>
+      <div class="hero-actions">
+        <button class="btn primary large" onclick="showPage('banks')">Explore Banks →</button>
+        <button class="btn outline large" onclick="showPage('register')">Create Account</button>
+      </div>
+      <div class="stats">
+        <div><b>10</b><small> Banks</small></div>
+        <div><b>৳5L</b><small> Loan Limit</small></div>
+        <div><b>24/7</b><small> Access</small></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="card-top"><span>VIRTUAL LOAN</span><span>✦</span></div>
+      <p>Available Demo Limit</p>
+      <h2>৳ 5,00,000</h2>
+      <div class="progress"><span></span></div>
+      <div class="card-bottom"><span>All Bank 7</span><span>DEMO ONLY</span></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-heading">
+      <div><span class="tag">OUR FEATURES</span><h2>Simple Digital Experience</h2></div>
+    </div>
+    <div class="feature-grid">
+      <article class="feature"><span>🏦</span><h3>Bank Selection</h3><p>Explore ten simulated bank cards.</p></article>
+      <article class="feature"><span>📝</span><h3>Loan Application</h3><p>Submit a virtual loan application.</p></article>
+      <article class="feature"><span>🪪</span><h3>Demo Verification</h3><p>Try front and back image previews using sample images only.</p></article>
+      <article class="feature"><span>📊</span><h3>Application Tracking</h3><p>See your simulated application status.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="banks" class="page section">
+  <span class="tag">BANK DIRECTORY</span>
+  <h1>Explore Banks</h1>
+  <p class="muted">These are illustrative, unofficial demo cards. No bank is affiliated with this project.</p>
+  <div id="bankGrid" class="bank-grid"></div>
+</section>
+
+<section id="login" class="page auth-page">
+  <div class="auth-card">
+    <span class="tag">WELCOME BACK</span>
+    <h1>Login to Account</h1>
+    <form id="loginForm">
+      <label>Email</label><input type="email" id="loginEmail" required placeholder="demo@example.com">
+      <label>Password</label><input type="password" id="loginPassword" required placeholder="Your password">
+      <button class="btn primary full">Login</button>
+    </form>
+    <p>New here? <a onclick="showPage('register')">Create account</a></p>
+  </div>
+</section>
+
+<section id="register" class="page auth-page">
+  <div class="auth-card">
+    <span class="tag">JOIN ALL BANK 7</span>
+    <h1>Create Account</h1>
+    <form id="registerForm">
+      <label>Full Name</label><input id="regName" required placeholder="Your name">
+      <label>Email</label><input type="email" id="regEmail" required placeholder="you@example.com">
+      <label>Phone Number</label><input id="regPhone" required placeholder="01XXXXXXXXX">
+      <label>Password</label><input type="password" id="regPassword" minlength="6" required placeholder="At least 6 characters">
+      <button class="btn primary full">Create Demo Account</button>
+    </form>
+    <p>Already registered? <a onclick="showPage('login')">Login</a></p>
+  </div>
+</section>
+
+<section id="dashboard" class="page section">
+  <div class="dashboard-head">
+    <div><span class="tag">PERSONAL SPACE</span><h1>Hello, <span id="userName">User</span> 👋</h1><p class="muted">Welcome to your demo dashboard.</p></div>
+    <button class="btn primary" onclick="showPage('apply')">+ Apply for Loan</button>
+  </div>
+  <div class="dashboard-stats">
+    <div class="stat-card"><small>Total Applications</small><h2 id="totalApps">0</h2></div>
+    <div class="stat-card"><small>Pending Applications</small><h2 id="pendingApps">0</h2></div>
+    <div class="stat-card"><small>Virtual Loan Amount</small><h2 id="virtualAmount">৳0</h2></div>
+  </div>
+  <div class="section-heading"><h2>My Applications</h2></div>
+  <div id="applicationList" class="application-list"></div>
+</section>
+
+<section id="apply" class="page section">
+  <div class="form-card">
+    <span class="tag">VIRTUAL LOAN REQUEST</span>
+    <h1>Loan Application</h1>
+    <p class="muted">All applications and amounts are simulated. No real loan is provided.</p>
+    <form id="loanForm">
+      <label>Select Demo Bank</label>
+      <select id="bankSelect" required></select>
+
+      <label>Loan Amount (BDT)</label>
+      <input type="number" id="loanAmount" min="5000" max="500000" step="1000" required placeholder="5000 - 500000">
+
+      <label>Loan Purpose</label>
+      <select id="loanPurpose" required>
+        <option value="">Select purpose</option>
+        <option>Education</option><option>Business</option>
+        <option>Personal</option><option>Other</option>
+      </select>
+
+      <label>Demo Identity Reference (no real NID)</label>
+      <input id="demoIdentity" placeholder="DEMO-123456" required>
+
+      <div class="upload-grid">
+        <div>
+          <label>Sample ID Front Image</label>
+          <input type="file" id="nidFront" accept="image/*">
+          <img id="frontPreview" class="preview hidden" alt="Front preview">
+        </div>
+        <div>
+          <label>Sample ID Back Image</label>
+          <input type="file" id="nidBack" accept="image/*">
+          <img id="backPreview" class="preview hidden" alt="Back preview">
+        </div>
+      </div>
+      <p class="notice">⚠️ Do not upload a real NID, passport or personal document. Use fictional sample images only. Images are previewed locally and are not submitted to a server.</p>
+      <label class="check"><input type="checkbox" required> I understand this is a demo application.</label>
+      <button class="btn primary full">Submit Demo Application</button>
+    </form>
+  </div>
+</section>
+
+<section id="payment" class="page auth-page">
+  <div class="auth-card">
+    <span class="tag">SIMULATED PAYMENT</span>
+    <h1>Demo Transaction</h1>
+    <p class="muted">No real payment is requested or processed.</p>
+    <div class="payment-summary">
+      <small>Application ID</small><h3 id="paymentAppId">—</h3>
+      <small>Demo Reference Amount</small><h2 id="paymentAmount">৳0</h2>
+    </div>
+    <form id="paymentForm">
+      <label>Demo Transaction Reference</label>
+      <input id="trxId" placeholder="DEMO-TRX-12345" required>
+      <label>Demo Payment Method</label>
+      <select id="paymentMethod"><option>bKash (Simulation)</option><option>Nagad (Simulation)</option><option>Other Demo</option></select>
+      <button class="btn primary full">Submit Demo Reference</button>
+    </form>
+    <button class="btn light full" onclick="showPage('dashboard')">Back to Dashboard</button>
+  </div>
+</section>
+
+<section id="tracking" class="page auth-page">
+  <div class="auth-card">
+    <span class="tag">APPLICATION TRACKING</span>
+    <h1>Track Your Application</h1>
+    <input id="trackId" placeholder="Enter application ID">
+    <button class="btn primary full" onclick="trackApplication()">Track Now</button>
+    <div id="trackingResult"></div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="brand">ALL BANK <b>7</b></div>
+  <p>Independent educational demo project. Not a bank, lender or financial institution.</p>
+  <p>© 2026 All Bank 7 Demo. All rights reserved.</p>
+</footer>
+
+<div id="toast" class="toast"></div>
+<script src="script.js"></script>
+</body>
+</html>
